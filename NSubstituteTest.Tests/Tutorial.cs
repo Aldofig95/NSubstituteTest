@@ -2,14 +2,8 @@
 using NSubstitute;
 using Xunit;
 
-namespace NSubstituteTest
+namespace NSubstituteTest.Tests
 {
-    public interface ICalculator
-    {
-        int Add(int a, int b);
-        string Mode { get; set; }
-        event EventHandler PoweringUp;
-    }
 
     public class CalculatorTests
     {

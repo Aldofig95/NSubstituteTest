@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NSubstituteTest.Test
+namespace NSubstituteTest
 {
     public interface IBank
     {
@@ -28,5 +28,4 @@ namespace NSubstituteTest.Test
         {
         }
     }
-
 }

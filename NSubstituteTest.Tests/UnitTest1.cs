@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using NSubstitute;
 using Xunit;
 
-namespace NSubstituteTest.Test
+namespace NSubstituteTest.Tests
 {
     public class BankAccountTests
     {
@@ -36,7 +36,11 @@ namespace NSubstituteTest.Test
         public void Withdraw_Exception_IfBalanceIsLow()
         {
             var bankAccount = Substitute.For<IBank>();
-            bankAccount.When(x => x.Withdraw(Arg.Any<decimal>())).Do(x => { if (bankAccount.Balance < (decimal)x[0]) throw new InsufficientFundsException("Insufficient funds"); });
+            bankAccount.When(x => x.Withdraw(Arg.Any<decimal>())).Do(x =>
+            {
+                if (bankAccount.Balance < (decimal)x[0])
+                    throw new InsufficientFundsException("Insufficient funds");
+            });
             bankAccount.Balance.Returns(50m);
 
             Assert.Throws<InsufficientFundsException>(() => bankAccount.Withdraw(75m));
@@ -60,7 +64,5 @@ namespace NSubstituteTest.Test
 
             handler.Received().Invoke(bankAccount, Arg.Is<BalanceChanged>(args => args.OldBalance == oldBalance && args.NewBalance == newBalance));
         }
-
     }
-
 }
